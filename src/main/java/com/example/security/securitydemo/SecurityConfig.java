@@ -16,17 +16,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-//
-//        UserDetails user = User.builder()
-//                .username("admin")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
+    @Bean
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+        User.UserBuilder users = User.withDefaultPasswordEncoder();
+        UserDetails user1 = users
+                .username("madhushan")
+                .password("password")
+                .roles("USER")
+                .build();
+
+        UserDetails user2 = users
+                .username("user1")
+                .password("password1")
+                .roles("USER")
+                .build();
+
+        return new InMemoryUserDetailsManager(user1, user2);
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
